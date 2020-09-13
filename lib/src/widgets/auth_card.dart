@@ -755,38 +755,31 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
       key: _formKey,
       child: Column(
         children: [
-          Container(
+          Padding(
             padding: EdgeInsets.only(
               // left: cardPadding,
               // right: cardPadding,
               top: !widget.isUserNameRequire
                   ? 0
-                  : !isLogin ? cardPadding + 10 : 0,
+                  : !isLogin ? cardPadding + 8 : 0,
             ),
-            width: cardWidth,
             child: widget.isUserNameRequire
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      ExpandableContainer(
-                        backgroundColor: theme.accentColor,
-                        controller: _switchAuthController,
-                        initialState: isLogin
-                            ? ExpandableContainerState.shrunk
-                            : ExpandableContainerState.expanded,
-                        alignment: Alignment.topLeft,
-                        color: theme.cardTheme.color,
-                        width: cardWidth,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: cardPadding,
-                          // vertical: 0,
-                        ),
-                        onExpandCompleted: () =>
-                            _postSwitchAuthController.forward(),
-                        child:
-                            _buildUserNameField(textFieldWidth, messages, auth),
-                      ),
-                    ],
+                ? ExpandableContainer(
+                    backgroundColor: theme.accentColor,
+                    controller: _switchAuthController,
+                    initialState: isLogin
+                        ? ExpandableContainerState.shrunk
+                        : ExpandableContainerState.expanded,
+                    alignment: Alignment.topLeft,
+                    color: theme.cardTheme.color,
+                    width: cardWidth,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: cardPadding,
+                      // vertical: 0,
+                    ),
+                    onExpandCompleted: () =>
+                        _postSwitchAuthController.forward(),
+                    child: _buildUserNameField(textFieldWidth, messages, auth),
                   )
                 : NullWidget(),
           ),
@@ -794,10 +787,13 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
             padding: EdgeInsets.only(
               left: cardPadding,
               right: cardPadding,
+              // bottom: !isLogin ? 10 : 0,
+              bottom: widget.isUserNameRequire ? !isLogin ? 10 : 0 : 0,
               top: !widget.isUserNameRequire
                   ? cardPadding + 10
                   : isLogin ? cardPadding + 10 : cardPadding + 4,
             ),
+            // color: Colors.blue,
             width: cardWidth,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -818,12 +814,13 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
             initialState: isLogin
                 ? ExpandableContainerState.shrunk
                 : ExpandableContainerState.expanded,
-            alignment: Alignment.topLeft,
+            alignment: Alignment.center,
+            // color: theme.cardTheme.color,
             color: theme.cardTheme.color,
             width: cardWidth,
             padding: EdgeInsets.symmetric(
               horizontal: cardPadding,
-              vertical: 10,
+              vertical: !widget.isUserNameRequire ? 10 : 0,
             ),
             onExpandCompleted: () => _postSwitchAuthController.forward(),
             child: _buildConfirmPasswordField(textFieldWidth, messages, auth),
