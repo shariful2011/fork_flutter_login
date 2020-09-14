@@ -61,6 +61,7 @@ class LoginScreen extends StatelessWidget {
           },
         ),
       ],
+      showAnimationColor: false,
       isUserNameRequire: true,
       email: '@.com',
       title: Constants.appName,
