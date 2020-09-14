@@ -491,8 +491,10 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
 
     if (newAuthMode == AuthMode.Signup) {
       _switchAuthController.forward();
+      _formKey.currentState.reset();
     } else {
       _switchAuthController.reverse();
+      _formKey.currentState.reset();
     }
   }
 
