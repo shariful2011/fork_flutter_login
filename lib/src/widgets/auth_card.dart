@@ -27,7 +27,7 @@ class AuthCard extends StatefulWidget {
     this.padding = const EdgeInsets.all(0),
     this.loadingController,
     this.emailValidator,
-    // this.userNameValidator,
+    this.userNameValidator,
     this.passwordValidator,
     this.onSubmit,
     this.onSubmitCompleted,
@@ -38,7 +38,7 @@ class AuthCard extends StatefulWidget {
   final EdgeInsets padding;
   final AnimationController loadingController;
   final FormFieldValidator<String> emailValidator;
-  // final FormFieldValidator<String> userNameValidator;
+  final FormFieldValidator<String> userNameValidator;
   final FormFieldValidator<String> passwordValidator;
   final Function onSubmit;
   final Function onSubmitCompleted;
@@ -298,7 +298,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
                         ? _formLoadingController
                         : (_formLoadingController..value = 1.0),
                     emailValidator: widget.emailValidator,
-                    // userNameValidator: widget.userNameValidator,
+                    userNameValidator: widget.userNameValidator,
                     passwordValidator: widget.passwordValidator,
                     onSwitchRecoveryPassword: () => _switchRecovery(true),
                     onSubmitCompleted: () {
@@ -342,7 +342,7 @@ class _LoginCard extends StatefulWidget {
     Key key,
     this.loadingController,
     @required this.emailValidator,
-    // @required this.userNameValidator,
+    @required this.userNameValidator,
     @required this.passwordValidator,
     @required this.onSwitchRecoveryPassword,
     this.onSwitchAuth,
@@ -353,7 +353,7 @@ class _LoginCard extends StatefulWidget {
 
   final AnimationController loadingController;
   final FormFieldValidator<String> emailValidator;
-  // final FormFieldValidator<String> userNameValidator;
+  final FormFieldValidator<String> userNameValidator;
   final FormFieldValidator<String> passwordValidator;
   final Function onSwitchRecoveryPassword;
   final Function onSwitchAuth;
@@ -586,7 +586,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
       onFieldSubmitted: (value) {
         FocusScope.of(context).requestFocus(_nameFocusNode);
       },
-      // validator: widget.userNameValidator,
+      validator: widget.userNameValidator,
       onSaved: (value) => auth.userName = value,
     );
   }
@@ -775,7 +775,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
                     width: cardWidth,
                     padding: EdgeInsets.symmetric(
                       horizontal: cardPadding,
-                      // vertical: 0,
+                      vertical: 5,
                     ),
                     onExpandCompleted: () =>
                         _postSwitchAuthController.forward(),
@@ -791,7 +791,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
               bottom: widget.isUserNameRequire ? !isLogin ? 10 : 0 : 0,
               top: !widget.isUserNameRequire
                   ? cardPadding + 10
-                  : isLogin ? cardPadding + 10 : cardPadding + 4,
+                  : isLogin ? cardPadding + 10 : cardPadding - 1,
             ),
             // color: Colors.blue,
             width: cardWidth,

@@ -223,7 +223,7 @@ class FlutterLogin extends StatefulWidget {
     this.messages,
     this.theme,
     this.emailValidator,
-    // this.userNameValidator,
+    this.userNameValidator,
     this.passwordValidator,
     this.onSubmitAnimationCompleted,
     this.logoTag,
@@ -267,7 +267,7 @@ class FlutterLogin extends StatefulWidget {
   final FormFieldValidator<String> emailValidator;
 
   /// Same as [emailValidator] but for username
-  // final FormFieldValidator<String> userNameValidator;
+  final FormFieldValidator<String> userNameValidator;
 
   /// Same as [emailValidator] but for password
   final FormFieldValidator<String> passwordValidator;
@@ -303,12 +303,12 @@ class FlutterLogin extends StatefulWidget {
     return null;
   };
 
-  // static final FormFieldValidator<String> defaultuserNameValidator = (value) {
-  //   if (value.isEmpty) {
-  //     return 'Username is required';
-  //   }
-  //   return null;
-  // };
+  static final FormFieldValidator<String> defaultuserNameValidator = (value) {
+    if (value.isEmpty) {
+      return 'Username is required';
+    }
+    return null;
+  };
 
   static final FormFieldValidator<String> defaultPasswordValidator = (value) {
     if (value.isEmpty || value.length <= 2) {
@@ -572,8 +572,8 @@ class _FlutterLoginState extends State<FlutterLogin>
     final headerHeight = cardTopPosition - headerMargin;
     final emailValidator =
         widget.emailValidator ?? FlutterLogin.defaultEmailValidator;
-    // final userNameValidator =
-    //     widget.userNameValidator ?? FlutterLogin.defaultuserNameValidator;
+    final userNameValidator =
+        widget.userNameValidator ?? FlutterLogin.defaultuserNameValidator;
     final passwordValidator =
         widget.passwordValidator ?? FlutterLogin.defaultPasswordValidator;
     return MultiProvider(
@@ -616,7 +616,7 @@ class _FlutterLoginState extends State<FlutterLogin>
                         padding: EdgeInsets.only(top: cardTopPosition),
                         loadingController: _loadingController,
                         emailValidator: emailValidator,
-                        // userNameValidator: userNameValidator,
+                        userNameValidator: userNameValidator,
                         passwordValidator: passwordValidator,
                         onSubmit: _reverseHeaderAnimation,
                         onSubmitCompleted: widget.onSubmitAnimationCompleted,

@@ -61,7 +61,7 @@ class LoginScreen extends StatelessWidget {
           },
         ),
       ],
-      isUserNameRequire: false,
+      isUserNameRequire: true,
       email: '@.com',
       title: Constants.appName,
       logo: 'assets/images/ecorp.png',
