@@ -230,6 +230,7 @@ class FlutterLogin extends StatefulWidget {
     this.titleTag,
     this.showDebugButtons = false,
     this.isUserNameRequire = false,
+    this.showAnimationColor = false,
     this.loginProvidersList = const <LoginProvider>[],
   }) : super(key: key);
 
@@ -293,8 +294,11 @@ class FlutterLogin extends StatefulWidget {
   ///For  Assinging email if user is already logged in or sign in
   final String email;
 
-  ///For  showing extra username field in signun
+  ///For  showing extra username field in signup
   final bool isUserNameRequire;
+
+  ///For show background color in animation
+  final bool showAnimationColor;
 
   static final FormFieldValidator<String> defaultEmailValidator = (value) {
     if (value.isEmpty || !Regex.email.hasMatch(value)) {
@@ -610,6 +614,7 @@ class _FlutterLoginState extends State<FlutterLogin>
                   children: <Widget>[
                     Positioned(
                       child: AuthCard(
+                        showAnimationColor: widget.showAnimationColor,
                         isUserNameRequire: widget.isUserNameRequire,
                         email: widget.email,
                         key: authCardKey,

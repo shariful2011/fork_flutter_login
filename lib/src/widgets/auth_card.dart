@@ -33,6 +33,7 @@ class AuthCard extends StatefulWidget {
     this.onSubmitCompleted,
     this.email,
     this.isUserNameRequire = false,
+    this.showAnimationColor = false,
   }) : super(key: key);
 
   final EdgeInsets padding;
@@ -44,6 +45,7 @@ class AuthCard extends StatefulWidget {
   final Function onSubmitCompleted;
   final String email;
   final bool isUserNameRequire;
+  final bool showAnimationColor;
 
   @override
   AuthCardState createState() => AuthCardState();
@@ -291,6 +293,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
               ? _buildLoadingAnimator(
                   theme: theme,
                   child: _LoginCard(
+                    showAnimationColor: widget.showAnimationColor,
                     isUserNameRequire: widget.isUserNameRequire,
                     email: widget.email,
                     key: _cardKey,
@@ -349,6 +352,7 @@ class _LoginCard extends StatefulWidget {
     this.onSubmitCompleted,
     this.email,
     this.isUserNameRequire,
+    this.showAnimationColor,
   }) : super(key: key);
 
   final AnimationController loadingController;
@@ -360,6 +364,7 @@ class _LoginCard extends StatefulWidget {
   final Function onSubmitCompleted;
   final String email;
   final bool isUserNameRequire;
+  final bool showAnimationColor;
 
   @override
   _LoginCardState createState() => _LoginCardState();
@@ -765,7 +770,9 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
                         : !isLogin ? cardPadding + 8 : 0,
                   ),
                   child: ExpandableContainer(
-                    backgroundColor: theme.accentColor,
+                    backgroundColor: widget.showAnimationColor
+                        ? theme.accentColor
+                        : Colors.transparent,
                     controller: _switchAuthController,
                     initialState: isLogin
                         ? ExpandableContainerState.shrunk
@@ -809,7 +816,9 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
             ),
           ),
           ExpandableContainer(
-            backgroundColor: theme.accentColor,
+            backgroundColor: widget.showAnimationColor
+                ? theme.accentColor
+                : Colors.transparent,
             controller: _switchAuthController,
             initialState: isLogin
                 ? ExpandableContainerState.shrunk
