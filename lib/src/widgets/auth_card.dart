@@ -34,7 +34,6 @@ class AuthCard extends StatefulWidget {
     this.email,
     this.isUserNameRequire = false,
     this.showAnimationColor = false,
-    this.backTologinOnRecover = false,
   }) : super(key: key);
 
   final EdgeInsets padding;
@@ -47,7 +46,6 @@ class AuthCard extends StatefulWidget {
   final String email;
   final bool isUserNameRequire;
   final bool showAnimationColor;
-  final bool backTologinOnRecover;
 
   @override
   AuthCardState createState() => AuthCardState();
@@ -296,7 +294,6 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
                   theme: theme,
                   child: _LoginCard(
                     showAnimationColor: widget.showAnimationColor,
-                    backTologinOnRecover: widget.backTologinOnRecover,
                     isUserNameRequire: widget.isUserNameRequire,
                     email: widget.email,
                     key: _cardKey,
@@ -316,7 +313,6 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
                 )
               : _RecoverCard(
                   emailValidator: widget.emailValidator,
-                  backTologinOnRecover: widget.backTologinOnRecover,
                   onSwitchLogin: () => _switchRecovery(false),
                 );
 
@@ -357,7 +353,6 @@ class _LoginCard extends StatefulWidget {
     this.email,
     this.isUserNameRequire,
     this.showAnimationColor,
-    this.backTologinOnRecover,
   }) : super(key: key);
 
   final AnimationController loadingController;
@@ -370,7 +365,6 @@ class _LoginCard extends StatefulWidget {
   final String email;
   final bool isUserNameRequire;
   final bool showAnimationColor;
-  final bool backTologinOnRecover;
 
   @override
   _LoginCardState createState() => _LoginCardState();
@@ -872,12 +866,10 @@ class _RecoverCard extends StatefulWidget {
     Key key,
     @required this.emailValidator,
     @required this.onSwitchLogin,
-    this.backTologinOnRecover,
   }) : super(key: key);
 
   final FormFieldValidator<String> emailValidator;
   final Function onSwitchLogin;
-  final bool backTologinOnRecover;
 
   @override
   _RecoverCardState createState() => _RecoverCardState();
@@ -932,12 +924,7 @@ class _RecoverCardState extends State<_RecoverCard>
     } else {
       showSuccessToast(context, messages.recoverPasswordSuccess);
       setState(() => _isSubmitting = false);
-      if (widget.backTologinOnRecover) {
-        widget.onSwitchLogin();
-      } else {
-        _submitController.reverse();
-      }
-
+      _submitController.reverse();
       return true;
     }
   }

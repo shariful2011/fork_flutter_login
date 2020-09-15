@@ -231,7 +231,6 @@ class FlutterLogin extends StatefulWidget {
     this.showDebugButtons = false,
     this.isUserNameRequire = false,
     this.showAnimationColor = false,
-    this.backTologinOnRecover = false,
     this.loginProvidersList = const <LoginProvider>[],
   }) : super(key: key);
 
@@ -300,9 +299,6 @@ class FlutterLogin extends StatefulWidget {
 
   ///For show background color in animation
   final bool showAnimationColor;
-
-  ///For Going back to login after password recovery
-  final bool backTologinOnRecover;
 
   static final FormFieldValidator<String> defaultEmailValidator = (value) {
     if (value.isEmpty || !Regex.email.hasMatch(value)) {
@@ -619,7 +615,6 @@ class _FlutterLoginState extends State<FlutterLogin>
                     Positioned(
                       child: AuthCard(
                         showAnimationColor: widget.showAnimationColor,
-                        backTologinOnRecover: widget.backTologinOnRecover,
                         isUserNameRequire: widget.isUserNameRequire,
                         email: widget.email,
                         key: authCardKey,
