@@ -434,8 +434,10 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
 
     _nameController =
         TextEditingController(text: auth.email != '' ? auth.email : _email);
-    _passController = TextEditingController(text: auth.password);
-    _confirmPassController = TextEditingController(text: auth.confirmPassword);
+    //_passController = TextEditingController(text: auth.password);
+    _passController = TextEditingController(text: '');
+    //_confirmPassController = TextEditingController(text: auth.confirmPassword);
+    _confirmPassController = TextEditingController(text: '');
 
     _loadingController = widget.loadingController ??
         (AnimationController(
