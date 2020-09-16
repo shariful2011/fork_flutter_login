@@ -70,7 +70,7 @@ class LoginScreen extends StatelessWidget {
       // showAnimationColor: false,
       // isUserNameRequire: true,
       // backTologinOnRecover: false,
-      // cardWidth: 0.9;
+      // cardWidth: 0.9,
       // messages: LoginMessages(
       //   usernameHint: 'Username',
       //   passwordHint: 'Pass',
