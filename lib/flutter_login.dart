@@ -232,6 +232,7 @@ class FlutterLogin extends StatefulWidget {
     this.isUserNameRequire = false,
     this.showAnimationColor = false,
     this.backTologinOnRecover = false,
+    this.cardWidth,
     this.loginProvidersList = const <LoginProvider>[],
   }) : super(key: key);
 
@@ -304,6 +305,9 @@ class FlutterLogin extends StatefulWidget {
   ///For Going back to login after password recovery
   final bool backTologinOnRecover;
 
+  ///For the width of the auth card
+  final double cardWidth;
+
   static final FormFieldValidator<String> defaultEmailValidator = (value) {
     if (value.isEmpty || !Regex.email.hasMatch(value)) {
       return 'Invalid email!';
@@ -324,6 +328,8 @@ class FlutterLogin extends StatefulWidget {
     }
     return null;
   };
+
+  static final double defaultcardWidth = 0.75;
 
   @override
   _FlutterLoginState createState() => _FlutterLoginState();
@@ -584,6 +590,7 @@ class _FlutterLoginState extends State<FlutterLogin>
         widget.userNameValidator ?? FlutterLogin.defaultuserNameValidator;
     final passwordValidator =
         widget.passwordValidator ?? FlutterLogin.defaultPasswordValidator;
+    final cardWidth = widget.cardWidth ?? FlutterLogin.defaultcardWidth;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(
@@ -630,6 +637,7 @@ class _FlutterLoginState extends State<FlutterLogin>
                         passwordValidator: passwordValidator,
                         onSubmit: _reverseHeaderAnimation,
                         onSubmitCompleted: widget.onSubmitAnimationCompleted,
+                        cardWidth: cardWidth,
                       ),
                     ),
                     Positioned(

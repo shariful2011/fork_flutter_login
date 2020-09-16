@@ -32,6 +32,7 @@ class AuthCard extends StatefulWidget {
     this.onSubmit,
     this.onSubmitCompleted,
     this.email,
+    this.cardWidth,
     this.isUserNameRequire = false,
     this.showAnimationColor = false,
     this.backTologinOnRecover = false,
@@ -48,6 +49,7 @@ class AuthCard extends StatefulWidget {
   final bool isUserNameRequire;
   final bool showAnimationColor;
   final bool backTologinOnRecover;
+  final double cardWidth;
 
   @override
   AuthCardState createState() => AuthCardState();
@@ -295,6 +297,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
               ? _buildLoadingAnimator(
                   theme: theme,
                   child: _LoginCard(
+                    cardWidth: widget.cardWidth,
                     showAnimationColor: widget.showAnimationColor,
                     backTologinOnRecover: widget.backTologinOnRecover,
                     isUserNameRequire: widget.isUserNameRequire,
@@ -358,6 +361,7 @@ class _LoginCard extends StatefulWidget {
     this.isUserNameRequire,
     this.showAnimationColor,
     this.backTologinOnRecover,
+    this.cardWidth,
   }) : super(key: key);
 
   final AnimationController loadingController;
@@ -371,6 +375,7 @@ class _LoginCard extends StatefulWidget {
   final bool isUserNameRequire;
   final bool showAnimationColor;
   final bool backTologinOnRecover;
+  final double cardWidth;
 
   @override
   _LoginCardState createState() => _LoginCardState();
@@ -756,12 +761,14 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    print("width= $widget.cardWidth");
     final auth = Provider.of<Auth>(context, listen: true);
     final isLogin = auth.isLogin;
     final messages = Provider.of<LoginMessages>(context, listen: false);
     final theme = Theme.of(context);
     final deviceSize = MediaQuery.of(context).size;
-    final cardWidth = min(deviceSize.width * 0.75, 360.0);
+    // final cardWidth = min(deviceSize.width * 0.75, 360.0);
+    final cardWidth = min(deviceSize.width * widget.cardWidth, 360.0);
     const cardPadding = 16.0;
     final textFieldWidth = cardWidth - cardPadding * 2;
     final authForm = Form(

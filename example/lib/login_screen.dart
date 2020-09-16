@@ -61,15 +61,16 @@ class LoginScreen extends StatelessWidget {
           },
         ),
       ],
-      showAnimationColor: false,
-      isUserNameRequire: true,
-      backTologinOnRecover: false,
       email: '@.com',
       title: Constants.appName,
       logo: 'assets/images/ecorp.png',
       logoTag: Constants.logoTag,
       titleTag: Constants.titleTag,
 
+      // showAnimationColor: false,
+      // isUserNameRequire: true,
+      // backTologinOnRecover: false,
+      // cardWidth: 0.9;
       // messages: LoginMessages(
       //   usernameHint: 'Username',
       //   passwordHint: 'Pass',
