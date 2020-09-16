@@ -52,7 +52,9 @@ class _FadeInState extends State<FadeIn> with SingleTickerProviderStateMixin {
     }
 
     _updateAnimations();
-    _controller?.forward();
+    if (_controller != null) {
+      _controller?.forward();
+    }
   }
 
   void _updateAnimations() {

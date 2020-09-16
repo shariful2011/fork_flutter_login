@@ -82,7 +82,9 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
     widget.loadingController.addStatusListener((status) {
       if (status == AnimationStatus.completed) {
         _isLoadingFirstTime = false;
-        _formLoadingController.forward();
+        if (_formLoadingController != null) {
+          _formLoadingController.forward();
+        }
       }
     });
 
@@ -166,7 +168,9 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
     if (widget.loadingController.isDismissed) {
       return widget.loadingController.forward().then((_) {
         if (!_isLoadingFirstTime) {
-          _formLoadingController.forward();
+          if (_formLoadingController != null) {
+            _formLoadingController.forward();
+          }
         }
       });
     } else if (widget.loadingController.isCompleted) {
@@ -201,15 +205,19 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
 
     widget?.onSubmit();
 
-    return _formLoadingController
-        .reverse()
-        .then((_) => _routeTransitionController.forward());
+    return _formLoadingController.reverse().then((_) {
+      if (_routeTransitionController != null) {
+        _routeTransitionController.forward();
+      }
+    });
   }
 
   void _reverseChangeRouteAnimation() {
-    _routeTransitionController
-        .reverse()
-        .then((_) => _formLoadingController.forward());
+    _routeTransitionController.reverse().then((_) {
+      if (_formLoadingController != null) {
+        _formLoadingController.forward();
+      }
+    });
   }
 
   void runChangeRouteAnimation() {
@@ -501,7 +509,9 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
     final newAuthMode = auth.switchAuth();
 
     if (newAuthMode == AuthMode.Signup) {
-      _switchAuthController.forward();
+      if (_switchAuthController != null) {
+        _switchAuthController.forward();
+      }
       _formKey.currentState.reset();
     } else {
       _switchAuthController.reverse();
@@ -520,7 +530,9 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
     }
 
     _formKey.currentState.save();
-    _submitController.forward();
+    if (_submitController != null) {
+      _submitController.forward();
+    }
     setState(() => _isSubmitting = true);
     final auth = Provider.of<Auth>(context, listen: false);
     String error;
