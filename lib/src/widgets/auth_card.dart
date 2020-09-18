@@ -329,6 +329,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
                   emailValidator: widget.emailValidator,
                   backTologinOnRecover: widget.backTologinOnRecover,
                   onSwitchLogin: () => _switchRecovery(false),
+                  cardWidth: widget.cardWidth,
                 );
 
           return Align(
@@ -699,7 +700,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
       child: FlatButton(
         child: Text(
           messages.forgotPasswordButton,
-          style: theme.textTheme.body1,
+          style: theme.textTheme.bodyText2,
           textAlign: TextAlign.left,
         ),
         onPressed: buttonEnabled
@@ -893,11 +894,13 @@ class _RecoverCard extends StatefulWidget {
     @required this.emailValidator,
     @required this.onSwitchLogin,
     this.backTologinOnRecover,
+    this.cardWidth,
   }) : super(key: key);
 
   final FormFieldValidator<String> emailValidator;
   final Function onSwitchLogin;
   final bool backTologinOnRecover;
+  final double cardWidth;
 
   @override
   _RecoverCardState createState() => _RecoverCardState();
@@ -1006,7 +1009,8 @@ class _RecoverCardState extends State<_RecoverCard>
     final auth = Provider.of<Auth>(context, listen: false);
     final messages = Provider.of<LoginMessages>(context, listen: false);
     final deviceSize = MediaQuery.of(context).size;
-    final cardWidth = min(deviceSize.width * 0.75, 360.0);
+    // final cardWidth = min(deviceSize.width * 0.75, 360.0);
+    final cardWidth = min(deviceSize.width * widget.cardWidth, 360.0);
     const cardPadding = 16.0;
     final textFieldWidth = cardWidth - cardPadding * 2;
 
@@ -1030,7 +1034,7 @@ class _RecoverCardState extends State<_RecoverCard>
                   messages.recoverPasswordIntro,
                   key: kRecoverPasswordIntroKey,
                   textAlign: TextAlign.center,
-                  style: theme.textTheme.body1,
+                  style: theme.textTheme.bodyText2,
                 ),
                 SizedBox(height: 20),
                 _buildRecoverNameField(textFieldWidth, messages, auth),
@@ -1039,7 +1043,7 @@ class _RecoverCardState extends State<_RecoverCard>
                   messages.recoverPasswordDescription,
                   key: kRecoverPasswordDescriptionKey,
                   textAlign: TextAlign.center,
-                  style: theme.textTheme.body1,
+                  style: theme.textTheme.bodyText2,
                 ),
                 SizedBox(height: 26),
                 _buildRecoverButton(theme, messages),
