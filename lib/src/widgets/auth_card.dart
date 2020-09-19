@@ -36,6 +36,9 @@ class AuthCard extends StatefulWidget {
     this.isUserNameRequire = false,
     this.showAnimationColor = false,
     this.backTologinOnRecover = false,
+    this.iconEmail,
+    this.iconUsername,
+    this.iconPassword,
   }) : super(key: key);
 
   final EdgeInsets padding;
@@ -50,6 +53,9 @@ class AuthCard extends StatefulWidget {
   final bool showAnimationColor;
   final bool backTologinOnRecover;
   final double cardWidth;
+  final IconData iconEmail;
+  final IconData iconUsername;
+  final IconData iconPassword;
 
   @override
   AuthCardState createState() => AuthCardState();
@@ -305,6 +311,9 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
               ? _buildLoadingAnimator(
                   theme: theme,
                   child: _LoginCard(
+                    iconEmail: widget.iconEmail,
+                    iconPassword: widget.iconPassword,
+                    iconUsername: widget.iconUsername,
                     cardWidth: widget.cardWidth,
                     showAnimationColor: widget.showAnimationColor,
                     backTologinOnRecover: widget.backTologinOnRecover,
@@ -330,6 +339,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
                   backTologinOnRecover: widget.backTologinOnRecover,
                   onSwitchLogin: () => _switchRecovery(false),
                   cardWidth: widget.cardWidth,
+                  iconPassword: widget.iconPassword,
                 );
 
           return Align(
@@ -371,6 +381,9 @@ class _LoginCard extends StatefulWidget {
     this.showAnimationColor,
     this.backTologinOnRecover,
     this.cardWidth,
+    this.iconEmail,
+    this.iconUsername,
+    this.iconPassword,
   }) : super(key: key);
 
   final AnimationController loadingController;
@@ -385,6 +398,9 @@ class _LoginCard extends StatefulWidget {
   final bool showAnimationColor;
   final bool backTologinOnRecover;
   final double cardWidth;
+  final IconData iconEmail;
+  final IconData iconUsername;
+  final IconData iconPassword;
 
   @override
   _LoginCardState createState() => _LoginCardState();
@@ -608,7 +624,9 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
     return AnimatedTextFormField(
       width: width,
       enabled: auth.isSignup,
-      prefixIcon: Icon(FontAwesomeIcons.solidUser),
+      prefixIcon: widget.iconUsername == null
+          ? Icon(FontAwesomeIcons.solidUser)
+          : widget.iconUsername,
       loadingController: _loadingController,
       inertiaController: _postSwitchAuthController,
       inertiaDirection: TextFieldInertiaDirection.right,
@@ -631,7 +649,9 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
       loadingController: _loadingController,
       interval: _nameTextFieldLoadingAnimationInterval,
       labelText: messages.usernameHint,
-      prefixIcon: Icon(FontAwesomeIcons.solidUserCircle),
+      prefixIcon: widget.iconEmail == null
+          ? Icon(FontAwesomeIcons.solidUserCircle)
+          : widget.iconEmail,
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
       focusNode: _nameFocusNode,
@@ -895,12 +915,14 @@ class _RecoverCard extends StatefulWidget {
     @required this.onSwitchLogin,
     this.backTologinOnRecover,
     this.cardWidth,
+    this.iconPassword,
   }) : super(key: key);
 
   final FormFieldValidator<String> emailValidator;
   final Function onSwitchLogin;
   final bool backTologinOnRecover;
   final double cardWidth;
+  final IconData iconPassword;
 
   @override
   _RecoverCardState createState() => _RecoverCardState();
@@ -971,7 +993,9 @@ class _RecoverCardState extends State<_RecoverCard>
       controller: _nameController,
       width: width,
       labelText: messages.usernameHint,
-      prefixIcon: Icon(FontAwesomeIcons.solidUserCircle),
+      prefixIcon: widget.iconPassword == null
+          ? Icon(FontAwesomeIcons.solidUserCircle)
+          : widget.iconPassword,
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.done,
       onFieldSubmitted: (value) => _submit(),
