@@ -626,7 +626,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
       enabled: auth.isSignup,
       prefixIcon: widget.iconUsername == null
           ? Icon(FontAwesomeIcons.solidUser)
-          : widget.iconUsername,
+          : Icon(widget.iconUsername),
       loadingController: _loadingController,
       inertiaController: _postSwitchAuthController,
       inertiaDirection: TextFieldInertiaDirection.right,
@@ -651,7 +651,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
       labelText: messages.usernameHint,
       prefixIcon: widget.iconEmail == null
           ? Icon(FontAwesomeIcons.solidUserCircle)
-          : widget.iconEmail,
+          : Icon(widget.iconEmail),
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.next,
       focusNode: _nameFocusNode,
@@ -995,7 +995,7 @@ class _RecoverCardState extends State<_RecoverCard>
       labelText: messages.usernameHint,
       prefixIcon: widget.iconPassword == null
           ? Icon(FontAwesomeIcons.solidUserCircle)
-          : widget.iconPassword,
+          : Icon(widget.iconPassword),
       keyboardType: TextInputType.emailAddress,
       textInputAction: TextInputAction.done,
       onFieldSubmitted: (value) => _submit(),
