@@ -237,6 +237,7 @@ class FlutterLogin extends StatefulWidget {
     this.iconEmail,
     this.iconUsername,
     this.iconPassword,
+    this.cardwidthByDeviceRatio,
   }) : super(key: key);
 
   /// Called when the user hit the submit button when in sign up mode
@@ -309,9 +310,10 @@ class FlutterLogin extends StatefulWidget {
   final bool backTologinOnRecover;
 
   ///For the width of the auth card
+  ///If you widthByDeviceRatio is set to false the the highest cardWidth is 1.0
   final double cardWidth;
 
-  ///For Email or TextField icon
+  ///For Email or Name TextField icon
   final IconData iconEmail;
 
   ///for Username TextField icon
@@ -319,6 +321,10 @@ class FlutterLogin extends StatefulWidget {
 
   ///for Passwword TextField icon
   final IconData iconPassword;
+
+  ///For the cardsWidth by device ratio default false
+  ///cardWidth is needed if you set this true
+  final bool cardwidthByDeviceRatio;
 
   static final FormFieldValidator<String> defaultEmailValidator = (value) {
     if (value.isEmpty || !Regex.email.hasMatch(value)) {
@@ -342,6 +348,7 @@ class FlutterLogin extends StatefulWidget {
   };
 
   static final double defaultcardWidth = 0.75;
+  static final bool defaultcardwidthByDeviceRatio = false;
 
   @override
   _FlutterLoginState createState() => _FlutterLoginState();
@@ -605,6 +612,8 @@ class _FlutterLoginState extends State<FlutterLogin>
     final passwordValidator =
         widget.passwordValidator ?? FlutterLogin.defaultPasswordValidator;
     final cardWidth = widget.cardWidth ?? FlutterLogin.defaultcardWidth;
+    final widthByDeviceRatio = widget.cardwidthByDeviceRatio ??
+        FlutterLogin.defaultcardwidthByDeviceRatio;
     return MultiProvider(
       providers: [
         ChangeNotifierProvider.value(
@@ -639,6 +648,7 @@ class _FlutterLoginState extends State<FlutterLogin>
                   children: <Widget>[
                     Positioned(
                       child: AuthCard(
+                        widthByDeviceRatio: widthByDeviceRatio,
                         showAnimationColor: widget.showAnimationColor,
                         backTologinOnRecover: widget.backTologinOnRecover,
                         isUserNameRequire: widget.isUserNameRequire,

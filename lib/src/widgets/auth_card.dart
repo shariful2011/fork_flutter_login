@@ -39,6 +39,7 @@ class AuthCard extends StatefulWidget {
     this.iconEmail,
     this.iconUsername,
     this.iconPassword,
+    this.widthByDeviceRatio,
   }) : super(key: key);
 
   final EdgeInsets padding;
@@ -53,6 +54,7 @@ class AuthCard extends StatefulWidget {
   final bool showAnimationColor;
   final bool backTologinOnRecover;
   final double cardWidth;
+  final bool widthByDeviceRatio;
   final IconData iconEmail;
   final IconData iconUsername;
   final IconData iconPassword;
@@ -315,6 +317,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
                     iconPassword: widget.iconPassword,
                     iconUsername: widget.iconUsername,
                     cardWidth: widget.cardWidth,
+                    widthByDeviceRatio: widget.widthByDeviceRatio,
                     showAnimationColor: widget.showAnimationColor,
                     backTologinOnRecover: widget.backTologinOnRecover,
                     isUserNameRequire: widget.isUserNameRequire,
@@ -339,6 +342,7 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
                   backTologinOnRecover: widget.backTologinOnRecover,
                   onSwitchLogin: () => _switchRecovery(false),
                   cardWidth: widget.cardWidth,
+                  widthByDeviceRatio: widget.widthByDeviceRatio,
                   iconPassword: widget.iconPassword,
                 );
 
@@ -384,6 +388,7 @@ class _LoginCard extends StatefulWidget {
     this.iconEmail,
     this.iconUsername,
     this.iconPassword,
+    this.widthByDeviceRatio,
   }) : super(key: key);
 
   final AnimationController loadingController;
@@ -401,6 +406,7 @@ class _LoginCard extends StatefulWidget {
   final IconData iconEmail;
   final IconData iconUsername;
   final IconData iconPassword;
+  final bool widthByDeviceRatio;
 
   @override
   _LoginCardState createState() => _LoginCardState();
@@ -802,7 +808,9 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
     final theme = Theme.of(context);
     final deviceSize = MediaQuery.of(context).size;
     // final cardWidth = min(deviceSize.width * 0.75, 360.0);
-    final cardWidth = min(deviceSize.width * widget.cardWidth, 360.0);
+    final cardWidth = widget.widthByDeviceRatio
+        ? min(deviceSize.width * widget.cardWidth, 360.0)
+        : widget.cardWidth;
     const cardPadding = 16.0;
     final textFieldWidth = cardWidth - cardPadding * 2;
     final authForm = Form(
@@ -916,6 +924,7 @@ class _RecoverCard extends StatefulWidget {
     this.backTologinOnRecover,
     this.cardWidth,
     this.iconPassword,
+    this.widthByDeviceRatio,
   }) : super(key: key);
 
   final FormFieldValidator<String> emailValidator;
@@ -923,6 +932,7 @@ class _RecoverCard extends StatefulWidget {
   final bool backTologinOnRecover;
   final double cardWidth;
   final IconData iconPassword;
+  final bool widthByDeviceRatio;
 
   @override
   _RecoverCardState createState() => _RecoverCardState();
@@ -1034,7 +1044,10 @@ class _RecoverCardState extends State<_RecoverCard>
     final messages = Provider.of<LoginMessages>(context, listen: false);
     final deviceSize = MediaQuery.of(context).size;
     // final cardWidth = min(deviceSize.width * 0.75, 360.0);
-    final cardWidth = min(deviceSize.width * widget.cardWidth, 360.0);
+    final cardWidth = widget.widthByDeviceRatio
+        ? min(deviceSize.width * widget.cardWidth, 360.0)
+        : widget.cardWidth;
+    // final cardWidth = min(deviceSize.width * widget.cardWidth, 360.0);
     const cardPadding = 16.0;
     final textFieldWidth = cardWidth - cardPadding * 2;
 
