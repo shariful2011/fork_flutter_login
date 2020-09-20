@@ -138,11 +138,10 @@ class AuthCardState extends State<AuthCard> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    super.dispose();
-
     _formLoadingController.dispose();
     _pageController.dispose();
     _routeTransitionController.dispose();
+    super.dispose();
   }
 
   void _switchRecovery(bool recovery) {
@@ -492,8 +491,6 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
 
   @override
   void dispose() {
-    super.dispose();
-
     _loadingController?.removeStatusListener(handleLoadingAnimationStatus);
     _passwordFocusNode.dispose();
     _confirmPasswordFocusNode.dispose();
@@ -505,6 +502,7 @@ class _LoginCardState extends State<_LoginCard> with TickerProviderStateMixin {
     _providerControllerList.forEach((controller) {
       controller.dispose();
     });
+    super.dispose();
   }
 
   void _switchAuthMode() {
@@ -931,8 +929,8 @@ class _RecoverCardState extends State<_RecoverCard>
 
   @override
   void dispose() {
-    super.dispose();
     _submitController.dispose();
+    super.dispose();
   }
 
   Future<bool> _submit() async {

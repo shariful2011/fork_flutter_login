@@ -123,8 +123,8 @@ class _AnimatedIconButtonState extends State<AnimatedIconButton>
 
   @override
   void dispose() {
-    super.dispose();
     widget.controller.removeStatusListener(handleStatusChanged);
+    super.dispose();
   }
 
   void handleStatusChanged(status) {
