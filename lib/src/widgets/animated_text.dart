@@ -79,8 +79,8 @@ class _AnimatedTextState extends State<AnimatedText>
 
   @override
   void dispose() {
-    _controller.dispose();
     super.dispose();
+    _controller.dispose();
   }
 
   Matrix4 get _matrix {

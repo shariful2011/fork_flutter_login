@@ -73,12 +73,6 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
   }
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return SizeTransition(
       sizeFactor: _sizeAnimation,

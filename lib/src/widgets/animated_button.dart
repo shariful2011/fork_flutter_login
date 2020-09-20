@@ -119,8 +119,8 @@ class _AnimatedButtonState extends State<AnimatedButton>
 
   @override
   void dispose() {
-    widget.controller.removeStatusListener(handleStatusChanged);
     super.dispose();
+    widget.controller.removeStatusListener(handleStatusChanged);
   }
 
   void handleStatusChanged(status) {
