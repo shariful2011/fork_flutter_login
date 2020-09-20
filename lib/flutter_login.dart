@@ -234,9 +234,6 @@ class FlutterLogin extends StatefulWidget {
     this.backTologinOnRecover = false,
     this.cardWidth,
     this.loginProvidersList = const <LoginProvider>[],
-    this.iconEmail,
-    this.iconUsername,
-    this.iconPassword,
   }) : super(key: key);
 
   /// Called when the user hit the submit button when in sign up mode
@@ -311,15 +308,6 @@ class FlutterLogin extends StatefulWidget {
   ///For the width of the auth card
   final double cardWidth;
 
-  ///For Email or Name TextField icon
-  final IconData iconEmail;
-
-  ///for Username TextField icon
-  final IconData iconUsername;
-
-  ///for Passwword TextField icon
-  final IconData iconPassword;
-
   static final FormFieldValidator<String> defaultEmailValidator = (value) {
     if (value.isEmpty || !Regex.email.hasMatch(value)) {
       return 'Invalid email!';
@@ -391,10 +379,10 @@ class _FlutterLoginState extends State<FlutterLogin>
 
   @override
   void dispose() {
-    super.dispose();
     _loadingController.dispose();
     _logoController.dispose();
     _titleController.dispose();
+    super.dispose();
   }
 
   void _reverseHeaderAnimation() {
@@ -652,9 +640,6 @@ class _FlutterLoginState extends State<FlutterLogin>
                         onSubmit: _reverseHeaderAnimation,
                         onSubmitCompleted: widget.onSubmitAnimationCompleted,
                         cardWidth: cardWidth,
-                        iconEmail: widget.iconEmail,
-                        iconPassword: widget.iconPassword,
-                        iconUsername: widget.iconUsername,
                       ),
                     ),
                     Positioned(
